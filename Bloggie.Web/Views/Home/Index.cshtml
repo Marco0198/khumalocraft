@@ -1,0 +1,123 @@
+﻿@model KhumaloCraft.Web.Models.ViewModels.HomeViewModel
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+
+<div class="container col-xxl-8 px-4 py-5">
+    <div class="row align-items-center g-5 py-5">
+        <div class="col-12 col-lg-6">
+            <div class="text-center">
+                <h1 class="display-4">Welcome to KhumaloCraft</h1>
+                <p>
+
+                    Celebrating the Art of Handmade Crafts
+
+                    At KhumaloCraft, we invite you to explore a world where creativity, tradition, and craftsmanship converge to create timeless treasures for your home and life.
+
+                    Discover Our Collections
+
+                    Handcrafted Ceramics:Explore our exquisite collection of handmade ceramics, each piece a unique expression of artisanal skill and creativity.
+
+
+
+                    Woven Textiles:Immerse yourself in the beauty of handwoven textiles, meticulously crafted by skilled artisans using traditional techniques and sustainable materials.
+
+
+                    Woodwork Creations:Experience the artistry of woodwork with our intricately carved pieces, blending timeless design with natural beauty.<br />
+
+                    <h5 class="m-2"> Our Mission</h5><br />
+
+                    At KhumaloCraft, we are dedicated to:<br />
+
+                    - Preserving Tradition:Honoring the rich heritage of artisanal craftsmanship and traditional techniques passed down through generations.<br />
+
+                    - Celebrating Diversity:Embracing the diversity of cultures and traditions, reflected in our eclectic range of handmade crafts.<br />
+
+                    - Promoting Sustainability:Fostering a sustainable approach to crafting by sourcing eco-friendly materials and supporting local communities.<br />
+
+                    <h5 class="m-2">Join Our Community</h5><br />
+
+                    Connect with us on social media to stay updated on our latest collections, behind-the-scenes stories, and exclusive offers. Sign up for our newsletter to receive artisanal inspiration straight to your inbox.
+                    <br />
+                    <h5 class="m-2">Shop Now</h5><br />
+
+                    Explore our online store to discover a curated selection of handmade crafts that inspire and delight. From statement pieces for your home to unique gifts for your loved ones, KhumaloCraft offers something special for every occasion.
+
+                    Experience the Beauty of Handmade
+
+                    Thank you for choosing KhumaloCraft, where every purchase supports the art of craftsmanship and the livelihoods of skilled artisans worldwide.
+
+                </p>
+            </div>
+        </div>
+
+        <div class="col-12 col-lg-6">
+            <img src="https://images.pexels.com/photos/57690/pexels-photo-57690.jpeg?auto=compress&cs=tinysrgb&w=600"
+                 alt="Bloggie - Dev blogs" 
+                 class="d-block mx-lg-auto img-fluid"  width="300"/>
+        </div>
+    </div>
+</div>
+
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-6 d-flex">
+            @if (Model != null && Model.Tags.Any())
+            {
+                foreach (var tag in Model.Tags)
+                {
+                    <span class="badge bg-dark me-1">
+                        @tag.Name
+                    </span>
+                }
+            }
+        </div>
+    </div>
+
+</div>
+
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-6">
+            @if (Model != null && Model.BlogPosts.Any())
+            {
+                foreach (var blogPost in Model.BlogPosts)
+                {
+                    <div class="mb-5 bg-light box-shadow p-5">
+                        <img src="@blogPost.FeaturedImageUrl" alt="@blogPost.Heading"
+                             class="mb-2 d-block img-fluid" />
+
+                        <h2 class="mb-4">@blogPost.Heading</h2>
+                        <p class="mb-4">
+                            Author: @blogPost.Author
+                            <br />
+                            Published Date: @blogPost.PublishedDate.ToShortDateString()
+                        </p>
+
+                        <p class="mb-4">
+                            @foreach (var tag in blogPost.Tags)
+                            {
+                                <span class="badge bg-secondary me-1">@tag.Name</span>
+                            }
+                        </p>
+
+                        <p class="mb-4">@blogPost.ShortDescription</p>
+
+                        <a class="btn btn-dark"
+                           asp-area=""
+                           asp-controller="Blogs"
+                           asp-action="Index"
+                           asp-route-urlHandle="@blogPost.UrlHandle"
+                           >Read More</a>
+                    </div>
+
+                }
+            }
+        </div>
+    </div>
+</div>
